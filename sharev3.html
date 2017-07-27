@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="highfaner.com">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>嗨范儿APP</title>
+    <script src="./js/auto.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/sharev3.css">
+    <link href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-main">
+      <header>
+        <div class="header-bg"></div>
+        <div class="header-ctx">
+          <div class="h">
+
+          </div>
+          <div class="d">
+
+          </div>
+        </div>
+      </header>
+      <p class="desc">
+
+      </p>
+      <div class="tab-main">
+        <div class="tab-item active">
+          热门
+        </div>
+        <div class="tab-item">
+          新鲜
+        </div>
+        <div class="tab-border"></div>
+      </div>
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="container-list frt">
+
+            </div>
+            <div class="nothing">
+              更多活动主题尽在嗨范儿APP...
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="container-list la" style="background: #f6f6f6;">
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-bg">
+
+      </div>
+    </footer>
+    <script src="./js/zepto.js" charset="utf-8"></script>
+    <script src="./js/common.js" charset="utf-8"></script>
+    <script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.min.js"></script>
+    <script type="text/javascript">
+      function render2(arr) {
+        var __item, __il, __ir;
+        for (var i = 0; i < arr.length; i ++) {
+
+
+          if ((i % 2) == 0) {
+              __item = $('<div class="item" style="border: none;"></div>');
+              __il = $('<div class="item-l"></div>');
+              __ir = $('<div class="item-r"></div>');
+          }
+          var __img = '<div class="img"></div>',
+            __infos = $('<div class="infos"></div>'),
+            __selfs = $('<div class="selfs"></div>'),
+            __self = $('<img class="self" src="" alt="">'),
+            __name = $('<span class="name"></span>'),
+            __statuss = $('<div class="statuss"></div>'),
+            __i = '<i></i>',
+            __span = '<span></span>';
+
+            __self.attr('src', arr[i].user_face);
+            __name.text(arr[i].user_nickname);
+            __selfs.append(__self).append(__name);
+            $(__i).appendTo(__statuss);
+            $(__span).text(arr[i].look_num).appendTo(__statuss); //like;
+            __infos.append(__selfs).append(__statuss);
+
+
+            if ((i % 2) == 0) {
+              $(__img).css('background', 'url("'+arr[i].img_url+'") no-repeat center center').css('background-size', 'cover').appendTo(__il);
+              $(__infos).appendTo(__il);
+              $(__item).append(__il);
+              $('.la').append(__item);
+            } else {
+              $(__img).css('background', 'url("'+arr[i].img_url+'") no-repeat center center').css('background-size', 'cover').appendTo(__ir);
+              $(__infos).appendTo(__ir);
+              $(__item).append(__ir);
+            }
+
+        }
+
+        $('.la').append($('<div class="nothing">更多活动主题尽在嗨范儿APP...</div>'));
+
+
+      }
+      function render1(arr) {
+        for (var i = 0; i < arr.length; i ++) {
+          var __item = $('<div class="item"></div>'),
+            __ih = $('<div class="item-h"></div>'),
+            __if = $('<div class="item-f"></div>'),
+            __iv = $('<div class="item-v"></div>'),
+            __play = $('<div class="playbar"></div>');
+          var __self = $('<img class="self" src="" alt="">'),
+            __name = $('<span class="name"></span>'),
+            __time = $('<span class="time"></span>');
+          var __idesc = $('<div class="item-desc"></div>'),
+            __tag = $('<span class="tag"></span>'),
+            __txt = $('<span class="txt"></span>'),
+            __status = $('<div class="status"></div>'),
+            __info = $('<div class="info"></div>'),
+            __look = $('<div class="look"></div>'),
+            __addr = $('<div class="addr"></div>'),
+            __i  = '<i></i>',
+            __span = '<span></span>',
+            __icons = $('<div class="icons"><i></i><i></i><i></i></div>');
+          if (arr[i].img_url) {
+            __iv.css('background', 'url("'+arr[i].img_url+'") no-repeat center center');
+            __iv.css('background-size', 'cover');
+          }
+
+          __self.attr('src', arr[i].user_face);
+          __name.text(arr[i].user_nickname);
+          __tag.text('# ' + $.trim(arr[i].label_name) + ' #');
+          __txt.text(arr[i].title);
+          __time.text(arr[i].create_date.substring(5));
+
+          __ih.append(__self).append(__name).append(__time).appendTo(__item);
+          __iv.append(__play).appendTo(__item);
+          __idesc.append(__tag).append(__txt).appendTo(__if);
+
+          $(__i).appendTo(__look);
+          $(__span).text(arr[i].look_num).appendTo(__look); //like;
+          $(__i).appendTo(__addr);
+          $(__span).text(arr[i].create_addr).appendTo(__addr);
+
+          __info.append(__look).append(__addr);
+          __status.append(__info).append(__icons);
+          __if.append(__status).appendTo(__item);
+
+          $('.frt').append(__item);
+        }
+      }
+      (function($, w){
+        var ids = $.utils.queryUrl(location.search, 'id');
+        var __type = '1';
+        if (ids) {
+          $.utils.post({
+            url: './php1/index.php',
+            data: {activity_id:ids,url:'activity'},
+            success: function(data) {
+              if (data && data.code == 1) {
+                var jsondata = data.data;
+                $('.header-bg').css('background', 'url("' + jsondata.cover_img_url + '") no-repeat center center').css('background-size', 'cover');
+                $('.header-ctx .h').text(jsondata.title);
+                $('.header-ctx .d').text(jsondata.participate_num + '人参与');
+                $('.desc').text(jsondata.info);
+              } else {
+                alert(data.msg);
+              }
+            }
+          });
+          $.utils.post({
+            url: './php1/index.php',
+            data: {activity_id:ids,type:__type,url:'avideos'},
+            success: function(data) {
+              if (data && data.code == 1) {
+                var jsondata = data.data.list;
+                render1(jsondata);
+                swiper.update();
+              } else {
+                alert(data.msg);
+              }
+            }
+          });
+        } else {
+          alert('请求错误！');
+        }
+        $('footer').on('click', function(event){
+          event.preventDefault();
+          location.href = 'http://www.highfaner.com/';
+        });
+        var tabs = $('.tab-main .tab-item');
+        var border = $('.tab-main .tab-border');
+        var tabsact = 0;
+        var swiper = new Swiper('.swiper-container', {
+            autoHeight: true, //enable auto height
+            // history: 'slides',
+            onSlideChangeEnd: function(swiper){
+              if (swiper.activeIndex > 0) {
+                if (lock) {
+                  var ps = swiper.activeIndex * 50;
+                  border.css('left', ps + '%');
+                  tabs.eq(tabsact).removeClass('active');
+                  tabs.eq(swiper.activeIndex).addClass('active'); //切换结束时，告诉我现在是第几个slide
+                  tabsact = swiper.activeIndex;
+                  return;
+                }
+                lock = true;
+                if (ids) {
+                  $.utils.post({
+                    url: './php1/index.php',
+                    data: {activity_id:ids,type:'2',url:'avideos'},
+                    success: function(data) {
+                      if (data && data.code == 1) {
+                        var jsondata = data.data.list;
+                        render2(jsondata);
+                        swiper.update();
+                      } else {
+                        alert(data.msg);
+                      }
+                    }
+                  });
+                } else {
+                  alert('请求错误！');
+                }
+              }
+              var ps = swiper.activeIndex * 50;
+              border.css('left', ps + '%');
+              tabs.eq(tabsact).removeClass('active');
+              tabs.eq(swiper.activeIndex).addClass('active'); //切换结束时，告诉我现在是第几个slide
+              tabsact = swiper.activeIndex;
+            }
+        });
+        var lock = false;
+        tabs.on('click', function(event){
+          event.preventDefault();
+          swiper.slideTo($(this).index());
+        });
+
+      })(Zepto, window);
+    </script>
+  </body>
+</html>
