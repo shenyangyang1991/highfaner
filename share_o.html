@@ -29,21 +29,67 @@
           </div>
           <div class="ids">
             <span>嗨范儿ID：</span>
-            <span></span>
+            <span>123123</span>
           </div>
           <div class="status">
             <div class="s1">
-              <span>动态：</span>
+              <span>动态：</span><span>123123</span>
             </div>
             <div class="s2">
-              <span>关注：</span>
+              <span>关注：</span><span>123123</span>
             </div>
             <div class="s3">
-              <span>粉丝：</span>
+              <span>粉丝：</span><span>12312</span>
             </div>
           </div>
         </div>
       </header>
+
+      <div class="container-list">
+        <div class="item">
+          <div class="item-v" style="background: url(&quot;http://cdn1.highfaner.com/2017-07/25/1500968416261.jpg&quot;) 50% 50% / cover no-repeat;"><div class="playbar"></div></div>
+          <div class="item-f"><div class="item-desc"><span class="txt">这是我的freestyle你喜欢吗？</span></div><div class="status"><div class="info"><div class="look"><i></i><span>202</span></div><div class="addr"><i></i><span>北京市  北京市</span></div></div><div class="icons"><i></i><span>1232323</span></div></div></div></div>
+      </div>
     </div>
+    <script src="./js/zepto.js" charset="utf-8"></script>
+    <script src="./js/common.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      (function(w, $){
+        var __urlParam = location.search;
+        var __id = $.utils.queryUrl(__urlParam, 'id');
+        var __tk = $.utils.queryUrl(__urlParam, '_t');
+        if (__id && __tk) {
+          $.utils.post({
+            url: './php1/index.php',
+            data: {url: 'info', user_id: __id, token: __tk},
+            success: function(data){
+              if (data && data.code == 1) {
+                var jsondata = data.data;
+                $('.self img').attr('src', jsondata.face_url);
+                $('.h2 span').text(jsondata.nickname);
+                switch (jsondata.is_master) {
+                  case '3':
+                    $('.h2 i').eq(0).addClass('super');
+                    break;
+                  case '4':
+                    $('.h2 i').eq(0).addClass('teacher');
+                    break;
+                  case '5':
+                    $('.h2 i').eq(0).addClass('team');
+                  default:
+                }
+
+                
+              } else {
+                alert(data.msg);
+              }
+            }
+          });
+        } else {
+          alert('请求页面错误！');
+        }
+
+      })(window, Zepto);
+    </script>
   </body>
 </html>

@@ -1,0 +1,213 @@
+header {
+  padding: .4rem .2rem;
+  border-bottom: 1px solid #d8d8d8;
+  overflow: hidden;
+}
+
+header .self {
+  float: left;
+  width: 1rem;
+  height: 1rem;
+  padding: .08rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+header .self img {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+header .info {
+  float: left;
+  width: 5.65rem;
+  margin-left: .2rem;
+}
+
+header .info .h2 {
+  padding: .1rem 0;
+  overflow: hidden;
+}
+
+header .h2 span {
+  float: left;
+  width: 4.6rem;
+  font-size: .36rem;
+  font-weight: 400;
+  line-height: .36rem;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+header .h2 i {
+  float: left;
+  width: .36rem;
+  height: .36rem;
+  margin-left: .1rem;
+  vertical-align: middle;
+}
+
+i.teacher {
+  background: url('../img/teacher.png') no-repeat center center;
+  background-size: .36rem .36rem;
+}
+
+i.team {
+  background: url('../img/team.png') no-repeat center center;
+  background-size: .36rem .36rem;
+}
+
+i.super {
+  background: url('../img/super.png') no-repeat center center;
+  background-size: .36rem .36rem;
+}
+
+i.girl {
+  background: url('../img/girl.png') no-repeat center center;
+  background-size: .36rem .36rem;
+}
+
+i.boy {
+  background: url('../img/boy.png') no-repeat center center;
+  background-size: .36rem .36rem;
+}
+
+.info .ids {
+  font-size: .28rem;
+  padding: .1rem 0;
+}
+
+.info .status {
+  padding: .1rem 0;
+  overflow: hidden;
+}
+
+.info .status > div {
+  float: left;
+  width: 33%;
+  font-size: .24rem;
+}
+
+.container-list {
+  padding-top: .2rem;
+}
+
+.container-list .item {
+  padding: 0 .2rem;
+  border-bottom: 1px solid #d8d8d8;
+  overflow: hidden;
+}
+
+.item .item-v {
+  position: relative;
+  width: 100%;
+  height: 4rem;
+  border-radius: 5px;
+  background: #666;
+  background-size: 7.1rem 4rem;
+}
+.item-v .playbar {
+  position: absolute;
+  z-index: 9;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.18rem;
+  height: 1.18rem;
+  margin: auto;
+  background: url('../img/playsb.png') no-repeat 0 0;
+  background-size: 1.18rem 1.18rem;
+}
+.item-f .item-desc {
+  padding: .2rem 0;
+  font-size: .28rem;
+}
+
+.item-desc .tag {
+  font-weight: 400;
+  color: #12dbd1;
+}
+
+.item-f .status {
+  padding: 0 0 .2rem;
+  overflow: hidden;
+}
+
+.item-f .info {
+  float: left;
+  height: .26rem;
+  padding: .05rem 0;
+}
+
+.item-f .info .look,
+.item-f .info .addr {
+  float: left;
+  margin-right: .2rem;
+}
+
+.item-f .info .look {
+  margin-right: .2rem;
+}
+
+.item-f .look i {
+  float: left;
+  width: .24rem;
+  height: .24rem;
+  padding: .01rem 0;
+  background: url('../img/play-b.png') no-repeat 0 0;
+  background-size: .24rem .24rem;
+}
+
+.item-f .look span {
+  float: left;
+  padding-left: .1rem;
+  font-size: .24rem;
+  color: #b0b0b0;
+  line-height: .26rem;
+}
+
+.item-f .addr i {
+  float: left;
+  width: .20rem;
+  height: .26rem;
+  /*padding: .01rem 0;*/
+  background: url('../img/addr-b.png') no-repeat 0 0;
+  background-size: .2rem .26rem;
+}
+
+.item-f .addr span {
+  float: left;
+  padding-left: .1rem;
+  font-size: .24rem;
+  color: #b0b0b0;
+  line-height: .26rem;
+}
+
+.icons {
+  float: right;
+  padding: .05rem 0
+}
+
+.icons i {
+  float: left;
+  width: .24rem;
+  height: .24rem;
+  /*padding: .01rem 0;*/
+  background: url('../img/times.png') no-repeat 0 0;
+  background-size: .24rem .24rem;
+}
+
+.icons span {
+  float: left;
+  padding-left: .1rem;
+  font-size: .24rem;
+  color: #b0b0b0;
+  line-height: .26rem;
+}
