@@ -113,10 +113,14 @@ header .header-ctx {
 }
 .selfs .name {
   float: left;
+   width: 1.2rem;
   font-size: .2rem;
   font-weight: 400;
   color: #fff;
   line-height: .7rem;
+      text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .item-h .name {
   float: left;
@@ -279,6 +283,7 @@ header .header-ctx {
 
 .selfs {
   float: left;
+  width: 1.9rem;
 }
 
 .statuss {

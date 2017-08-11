@@ -1,3 +1,7 @@
+body {
+  padding-bottom: 1rem;
+  /*background: #f6f6f6;*/
+}
 header {
   padding: .4rem .2rem;
   border-bottom: 1px solid #d8d8d8;
@@ -25,7 +29,7 @@ header .self img {
 
 header .info {
   float: left;
-  width: 5.65rem;
+  width: 5.4rem;
   margin-left: .2rem;
 }
 
@@ -36,7 +40,7 @@ header .info .h2 {
 
 header .h2 span {
   float: left;
-  width: 4.6rem;
+  width: 4.2rem;
   font-size: .36rem;
   font-weight: 400;
   line-height: .36rem;
@@ -95,11 +99,11 @@ i.boy {
 }
 
 .container-list {
-  padding-top: .2rem;
+  /*padding-top: .2rem;*/
 }
 
 .container-list .item {
-  padding: 0 .2rem;
+  padding: .2rem .2rem 0;
   border-bottom: 1px solid #d8d8d8;
   overflow: hidden;
 }

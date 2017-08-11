@@ -29,31 +29,37 @@
           </div>
           <div class="ids">
             <span>嗨范儿ID：</span>
-            <span>123123</span>
+            <span></span>
           </div>
           <div class="status">
             <div class="s1">
-              <span>动态：</span><span>123123</span>
+              <span>动态：</span><span></span>
             </div>
             <div class="s2">
-              <span>关注：</span><span>123123</span>
+              <span>关注：</span><span></span>
             </div>
             <div class="s3">
-              <span>粉丝：</span><span>12312</span>
+              <span>粉丝：</span><span></span>
             </div>
           </div>
         </div>
       </header>
 
       <div class="container-list">
-        <div class="item">
-          <div class="item-v" style="background: url(&quot;http://cdn1.highfaner.com/2017-07/25/1500968416261.jpg&quot;) 50% 50% / cover no-repeat;"><div class="playbar"></div></div>
-          <div class="item-f"><div class="item-desc"><span class="txt">这是我的freestyle你喜欢吗？</span></div><div class="status"><div class="info"><div class="look"><i></i><span>202</span></div><div class="addr"><i></i><span>北京市  北京市</span></div></div><div class="icons"><i></i><span>1232323</span></div></div></div></div>
+        
       </div>
     </div>
+    <footer>
+      <div class="footer-bg">
+
+      </div>
+    </footer>
     <script src="./js/zepto.js" charset="utf-8"></script>
     <script src="./js/common.js" charset="utf-8"></script>
     <script type="text/javascript">
+    function linkTo(__idn) {
+        location.href = 'http://www.highfaner.com/share_v3.html?id=' + __idn;
+      }
       (function(w, $){
         var __urlParam = location.search;
         var __id = $.utils.queryUrl(__urlParam, 'id');
@@ -78,17 +84,47 @@
                     $('.h2 i').eq(0).addClass('team');
                   default:
                 }
-
+                switch (jsondata.sex) {
+                  case '1':
+                    $('.h2 i').eq(1).addClass('boy');
+                    break;
+                  case '2':
+                    $('.h2 i').eq(1).addClass('girl');
+                    break;
+                  default:
+                }
+                $('.ids span').eq(1).text(jsondata.user_id);
+                $('.s2 span').eq(1).text(jsondata.follow_num);
+                $('.s3 span').eq(1).text(jsondata.fans_num);
+                $('.s1 span').eq(1).text(jsondata.videos_num);
                 
               } else {
                 alert(data.msg);
               }
             }
           });
+
+
+          $.utils.post({
+            url: './php1/index.php',
+            data: {url: 'user_vidoes', user_id: __id, rows: '3'},
+            success: function(data){
+              var jsondata = data.data.list;
+              for(var i = 0; i < jsondata.length; i ++) {
+                var ele = '<div onclick="linkTo(\''+ jsondata[i].video_id +'\')" class="item"><div class="item-v"><div class="playbar"></div></div><div class="item-f"><div class="item-desc"><span class="txt">'+jsondata[i].title+'</span></div><div class="status"><div class="info"><div class="look"><i></i><span>'+jsondata[i].look_num+'</span></div><div class="addr"><i></i><span>'+ jsondata[i].create_addr +'</span></div></div><div class="icons"><i></i><span>'+ $.utils.dateParser(jsondata[i].create_date, ['@年前', '@个月前', '@天前', '@小时前', '@分钟前', '刚刚']); +'</span></div></div></div></div>';
+
+                $('.container-list').append(ele);
+                $('.container-list .item-v').eq(i).css('background','url("'+jsondata[i].img_url+'") no-repeat center center').css('background-size','cover');
+              }
+            }
+          });
         } else {
           alert('请求页面错误！');
         }
-
+        $('footer').on('click', function(event){
+          event.preventDefault();
+          location.href = 'http://www.highfaner.com/';
+        });
       })(window, Zepto);
     </script>
   </body>

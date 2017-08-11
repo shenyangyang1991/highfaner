@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="highfaner.com">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>嗨范儿APP</title>
+    <script src="./js/auto.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/share_v3.css">
+    <link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-main">
+      <header>
+       <div class="video"></div>
+       <div class="desc">
+         <span class="tag"></span>
+         <span class="txt"></span>
+       </div>
+       <div class="self">
+         <div class="self-img">
+           <img src="">
+           <i></i>
+         </div>
+         <div class="name"></div>
+         <div class="follower">
+           关注
+         </div>
+       </div>
+      </header>
+      <div class="title">
+        每日精选潮流视频
+      </div>
+      <div class="container-list">
+        
+      </div>
+    </div>
+    <footer>
+      <div class="footer-bg">
+
+      </div>
+    </footer>
+    <script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+    <script src="./js/zepto.js" charset="utf-8"></script>
+    <script src="./js/common.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      function linkTo(__idn) {
+        location.href = 'http://www.highfaner.com/share_v3.html?id=' + __idn;
+      }
+      (function(w, $){
+
+        
+
+        var __urlParam = location.search;
+        var __id = $.utils.queryUrl(__urlParam, 'id');
+        // var __tk = $.utils.queryUrl(__urlParam, '_tk');
+
+        if (__id) {
+          $.utils.post({
+            url: './php1/index.php',
+            data: {url: 'video', video_id: __id},
+            success: function(data){
+              if (data && data.code == 1) {
+                var jsondata = data.data;
+                $('.desc .tag').text('#' + jsondata.label_name + '#');
+                $('.desc .txt').text(jsondata.title);
+                $('.self-img img').attr('src', jsondata.user_face);
+                $('.self .name').text(jsondata.user_nickname);
+                $('.video').append('<video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" poster="'+jsondata.img_url+'"><source src="'+encodeURI(jsondata.video_url)+'" type="video/mp4" /></video>');
+                videojs("example_video_1", {}, function(){
+                  // Player (this) is initialized and ready.
+                });
+                switch (jsondata.is_master) {
+                  case '3':
+                    $('.self-img i').addClass('super');
+                    break;
+                  case '4':
+                    $('.self-img i').addClass('teacher');
+                    break;
+                  case '5':
+                    $('.self-img i').addClass('team');
+                  default:
+                }
+              } else {
+                alert(data.msg);
+              }
+            }
+          });
+
+
+          $.utils.post({
+            url: './php1/index.php',
+            data: {url: 'pgc', label_id: '6', rows: '3'},
+            success: function(data){
+              var jsondata = data.data.list;
+              for(var i = 0; i < jsondata.length; i ++) {
+                var __item = $('<div onclick="linkTo(\''+ jsondata[i].video_id +'\')" class="item"></div>');
+                var __item_d = $('<div class="item-desc"></div>');
+                var __item_h = $('<div class="h"></div>');
+                var __p = $('<p></p>');
+                var __sp = '<span></span>';
+
+                __item_h.text(jsondata[i].title);
+                $(__sp).text('@' + jsondata[i].user_nickname).appendTo(__p);
+                __p.append($(__sp).text('/'));
+                $(__sp).text(jsondata[i].look_num + '次播放').appendTo(__p);
+                __item_d.append(__item_h).append(__p);
+                __item.css('background','url("'+jsondata[i].img_url+'") no-repeat center center').css('background-size', 'cover');
+                __item.append(__item_d).appendTo('.container-list');
+                
+              }
+            }
+          });
+        } else {
+          alert('请求页面错误！');
+        }
+        $('footer').on('click', function(event){
+          event.preventDefault();
+          location.href = 'http://www.highfaner.com/';
+        });
+      })(window, Zepto);
+    </script>
+  </body>
+</html>

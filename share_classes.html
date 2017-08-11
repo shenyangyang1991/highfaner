@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="highfaner.com">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>嗨范儿APP</title>
+    <script src="./js/auto.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/share_classes.css">
+    <link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-main">
+      <header>
+       <div class="video"></div>
+       <div class="title"></div>
+       <div class="desc">
+         <span class="txt"></span>
+       </div>
+       
+      </header>
+      <div class="container-list">
+        <div class="h">
+          <div class="th">动作列表</div>
+          <div class="td">
+            <span></span>
+            个动作
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+    <footer>
+      <div class="footer-bg">
+
+      </div>
+    </footer>
+    <script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+    <script src="./js/zepto.js" charset="utf-8"></script>
+    <script src="./js/common.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      
+      (function(w, $){
+
+        
+
+        var __urlParam = location.search;
+        var __id = $.utils.queryUrl(__urlParam, 'id');
+        // var __tk = $.utils.queryUrl(__urlParam, '_tk');
+
+        if (__id) {
+          $.utils.post({
+            url: './php1/index.php',
+            data: {url: 'classes', curriculum_id: __id},
+            success: function(data){
+              if (data && data.code == 1) {
+                var jsondata = data.data;
+                $('.title').text(jsondata.title);
+                $('.desc .txt').text(jsondata.info);
+                $('.video').append('<video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" poster="'+jsondata.img_url+'"><source src="'+encodeURI(jsondata.video_url)+'" type="video/mp4" /></video>');
+                videojs("example_video_1", {}, function(){
+                  // Player (this) is initialized and ready.
+                });
+
+                var lists = jsondata.curriculum_video_list;
+                $('.td span').text(lists.length);
+                for(var i = 0; i < lists.length; i ++) {
+                  var ele = '<div class="item"><div class="view"><img src="'+lists[i].img_url+'"></div><div class="ctxt">'+ lists[i].title +'</div></div>';
+                  $('.container-list').append(ele);
+                }
+                
+              } else {
+                alert(data.msg);
+              }
+            }
+          });
+
+
+          
+        } else {
+          alert('请求页面错误！');
+        }
+        $('footer').on('click', function(event){
+          event.preventDefault();
+          location.href = 'http://www.highfaner.com/';
+        });
+      })(window, Zepto);
+    </script>
+  </body>
+</html>

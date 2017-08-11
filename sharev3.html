@@ -69,6 +69,13 @@
     <script src="./js/common.js" charset="utf-8"></script>
     <script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.min.js"></script>
     <script type="text/javascript">
+    function linkTo(__idn) {
+        location.href = 'http://www.highfaner.com/share_v3.html?id=' + __idn;
+      }
+      function linkTo2() {
+        var __idn = $(this).data('id');
+        location.href = 'http://www.highfaner.com/share_v3.html?id=' + __idn;
+      }
       function render2(arr) {
         var __item, __il, __ir;
         for (var i = 0; i < arr.length; i ++) {
@@ -97,11 +104,15 @@
 
 
             if ((i % 2) == 0) {
+              __il.data('id', arr[i].video_id);
+              __il.on('click', linkTo2);
               $(__img).css('background', 'url("'+arr[i].img_url+'") no-repeat center center').css('background-size', 'cover').appendTo(__il);
               $(__infos).appendTo(__il);
               $(__item).append(__il);
               $('.la').append(__item);
             } else {
+              __ir.data('id', arr[i].video_id);
+              __ir.on('click', linkTo2);
               $(__img).css('background', 'url("'+arr[i].img_url+'") no-repeat center center').css('background-size', 'cover').appendTo(__ir);
               $(__infos).appendTo(__ir);
               $(__item).append(__ir);
@@ -115,7 +126,7 @@
       }
       function render1(arr) {
         for (var i = 0; i < arr.length; i ++) {
-          var __item = $('<div class="item"></div>'),
+          var __item = $('<div class="item" onclick="linkTo(\''+arr[i].video_id+'\')"></div>'),
             __ih = $('<div class="item-h"></div>'),
             __if = $('<div class="item-f"></div>'),
             __iv = $('<div class="item-v"></div>'),
@@ -142,7 +153,7 @@
           __name.text(arr[i].user_nickname);
           __tag.text('# ' + $.trim(arr[i].label_name) + ' #');
           __txt.text(arr[i].title);
-          __time.text(arr[i].create_date.substring(5));
+          __time.text($.utils.dateParser(arr[i].create_date, ['@年前', '@个月前', '@天前', '@小时前', '@分钟前', '刚刚']));
 
           __ih.append(__self).append(__name).append(__time).appendTo(__item);
           __iv.append(__play).appendTo(__item);
